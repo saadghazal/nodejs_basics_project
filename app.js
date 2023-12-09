@@ -16,6 +16,8 @@ const server = http.createServer((req,res)=>{
     if(url === "/message" && method === "POST"){ 
         const body = [];
         // getting user data in chunks with buffers concept.
+
+        // Node JS : when it first encounter this line it will simple add a new event listener internally
         req.on('data',(chunk)=>{
             // Note --> We Can't work with the chunk itself
             console.log("Chunk:",chunk)
@@ -25,20 +27,21 @@ const server = http.createServer((req,res)=>{
         ****** Data Event: ******
         The data event will be fired whenever a new chunk is ready to be read.
         */
-       req.on('end',()=>{
+       return req.on('end',()=>{
         // in this function we can rely on all the chunks being read in.
         const parsedBody = Buffer.concat(body).toString()
         const message = parsedBody.split('=')[1]
         fs.writeFileSync("message.txt",message)
+        res.statusCode = 302 //redirection
+        res.setHeader('Location','/')
+        return res.end();
        })
        /*
         ****** End Event: ******
         This end event will be fired once it's done parsing the incoming requests data
         or the incoming requests in general.
        */
-        res.statusCode = 302 //redirection
-        res.setHeader('Location','/')
-        return res.end();
+        
     }
     let name = "Ghazal"
     res.setHeader('Content-Type','text/html')
