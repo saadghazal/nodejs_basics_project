@@ -31,10 +31,13 @@ const server = http.createServer((req,res)=>{
         // in this function we can rely on all the chunks being read in.
         const parsedBody = Buffer.concat(body).toString()
         const message = parsedBody.split('=')[1]
-        fs.writeFileSync("message.txt",message)
-        res.statusCode = 302 //redirection
-        res.setHeader('Location','/')
-        return res.end();
+        // fs.writeFileSync("message.txt",message) // this sync method it will puase the execution until it's don writing on a file.
+        fs.writeFile("message.txt",message,(err)=>{
+            res.statusCode = 302 //redirection
+            res.setHeader('Location','/')
+            return res.end();
+        })// it's recommended to use this method
+        
        })
        /*
         ****** End Event: ******
