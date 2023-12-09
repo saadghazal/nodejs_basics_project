@@ -1,0 +1,23 @@
+{
+  "name": "nodejs_course2",
+  "version": "1.0.0",
+  "description": "Node JS Basics Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saadghazal/nodejs_basics_project.git"
+  },
+  "author": "Saad Ghazal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saadghazal/nodejs_basics_project/issues"
+  },
+  "homepage": "https://github.com/saadghazal/nodejs_basics_project#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
